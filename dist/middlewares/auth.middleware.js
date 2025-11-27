@@ -52,6 +52,13 @@ export const auth = asyncHandler(async (req, res, next) => {
         return next();
     }
     catch (error) {
-        throw new AppError("INVALID_CREDENTIALS", { reason: error.message });
+        // Provide more specific error messages for debugging
+        if (error.name === "TokenExpiredError") {
+            throw new AppError("ACCESS_DENIED", { reason: "Token expired" });
+        }
+        if (error.name === "JsonWebTokenError") {
+            throw new AppError("ACCESS_DENIED", { reason: "Invalid token" });
+        }
+        throw new AppError("ACCESS_DENIED", { reason: error.message || "Authentication failed" });
     }
 });

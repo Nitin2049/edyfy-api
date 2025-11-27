@@ -124,8 +124,8 @@ export const login = asyncHandler(async (req, res, next) => {
         // });
         res.cookie("accessToken", accessToken, {
             httpOnly: true,
-            secure: false,
-            sameSite: "lax",
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
             path: "/",
             maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
         });
@@ -201,6 +201,11 @@ export const logout = asyncHandler(async (req, res, next) => {
         return next(new AppError("ACCESS_DENIED", { reason: "Unauthenticated" }));
     }
     await User.findByIdAndUpdate(userId, { $inc: { tokenVersion: 1 } });
-    res.clearCookie("accessToken", { path: "/" });
+    res.clearCookie("accessToken", {
+        path: "/",
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    });
     return ResponseHelper.success(res, { message: "Logged out", discardTokens: true }, SUCCESS_CODES.OPERATION_SUCCESS);
 });
