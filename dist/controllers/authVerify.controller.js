@@ -15,8 +15,10 @@ export const verifyToken = asyncHandler(async (req, res, next) => {
         // Using httpOnly cookie set on login
         const cookieToken = req?.cookies?.accessToken;
         console.log("Cookies:", req.cookies); // debug
-        if (!cookieToken)
-            return next(new AppError("ACCESS_DENIED", { reason: "No token found" }));
+        // No token = user not logged in (not an error, just not authenticated)
+        if (!cookieToken) {
+            return ResponseHelper.success(res, { user: null }, SUCCESS_CODES.OPERATION_SUCCESS);
+        }
         // Verify JWT
         const decoded = jwt.verify(cookieToken, ACCESS_SECRET, {
             algorithms: ["HS256"],
@@ -27,14 +29,15 @@ export const verifyToken = asyncHandler(async (req, res, next) => {
         const user = await User.findById(decoded.sub)
             .select("_id username role schoolId email")
             .lean();
-        if (!user)
-            return next(new AppError("RESOURCE_NOT_FOUND", { reason: "User not found" }));
+        if (!user) {
+            // User not found - clear invalid cookie and return null
+            return ResponseHelper.success(res, { user: null }, SUCCESS_CODES.OPERATION_SUCCESS);
+        }
         return ResponseHelper.success(res, { user }, SUCCESS_CODES.OPERATION_SUCCESS);
     }
     catch (err) {
-        if (err.name === "TokenExpiredError") {
-            throw new AppError("ACCESS_DENIED", { reason: "Token expired" });
-        }
-        throw new AppError("ACCESS_DENIED", { reason: err.message });
+        // Token expired or invalid - return null user instead of error
+        // This is expected for logged-out users or expired sessions
+        return ResponseHelper.success(res, { user: null }, SUCCESS_CODES.OPERATION_SUCCESS);
     }
 });

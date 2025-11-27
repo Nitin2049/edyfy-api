@@ -54,11 +54,11 @@ export const auth = asyncHandler(async (req, res, next) => {
     catch (error) {
         // Provide more specific error messages for debugging
         if (error.name === "TokenExpiredError") {
-            throw new AppError("ACCESS_DENIED", { reason: "Token expired" });
+            throw new AppError("ACCESS_DENIED", { message: "Token expired" });
         }
         if (error.name === "JsonWebTokenError") {
-            throw new AppError("ACCESS_DENIED", { reason: "Invalid token" });
+            throw new AppError("ACCESS_DENIED", { message: "Invalid token" });
         }
-        throw new AppError("ACCESS_DENIED", { reason: error.message || "Authentication failed" });
+        throw new AppError("ACCESS_DENIED", { message: error.message || "Authentication failed" });
     }
 });
