@@ -163,10 +163,18 @@ export const login = asyncHandler(
       //   expiresIn: refreshTtl,
       // });
 
+      // Debug: log environment and cookie settings
+      const isProduction = process.env.NODE_ENV === "production";
+      logger.info("Setting cookie", { 
+        isProduction, 
+        NODE_ENV: process.env.NODE_ENV,
+        CLIENT_URL: process.env.CLIENT_URL 
+      });
+
       res.cookie("accessToken", accessToken, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+        secure: isProduction,
+        sameSite: isProduction ? "none" : "lax",
         path: "/",   
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       });

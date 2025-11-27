@@ -6,9 +6,12 @@ export const auth = asyncHandler(async (req, res, next) => {
     try {
         // Strict cookie-based auth: read JWT only from httpOnly cookie
         const token = req?.cookies?.accessToken;
-        console.log("Token from cookie:", token);
+        // Debug logging
+        console.log("Auth Middleware - Cookies received:", Object.keys(req?.cookies || {}));
+        console.log("Auth Middleware - Token present:", !!token);
+        console.log("Auth Middleware - Origin:", req.headers.origin);
         if (!token) {
-            throw new AppError("ACCESS_DENIED", { reason: "No token found" });
+            throw new AppError("ACCESS_DENIED", { reason: "No token found in cookies" });
         }
         const ACCESS_SECRET = process.env.JWT_ACCESS_SECRET;
         const JWT_ISSUER = process.env.JWT_ISSUER;
