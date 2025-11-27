@@ -18,15 +18,22 @@ export const verifyToken = asyncHandler(async (
     const JWT_AUDIENCE = process.env.JWT_AUDIENCE;
     if (!ACCESS_SECRET) throw new AppError("INTERNAL_SERVER_ERROR");
 
-    // Using httpOnly cookie set on login
-    const cookieToken = (req as any)?.cookies?.accessToken as
-      | string
-      | undefined;
+    // Try to get token from Authorization header first, then fall back to cookie
+    let token: string | undefined;
+    
+    const authHeader = req.headers.authorization;
+    if (authHeader && authHeader.startsWith("Bearer ")) {
+      token = authHeader.substring(7); // Remove "Bearer " prefix
+    } else {
+      // Fall back to cookie
+      token = (req as any)?.cookies?.accessToken as string | undefined;
+    }
 
-    console.log("Cookies:", req.cookies); // debug
+    console.log("Verify - Token source:", authHeader ? "Authorization header" : "Cookie");
+    console.log("Verify - Token present:", !!token);
 
     // No token = user not logged in (not an error, just not authenticated)
-    if (!cookieToken) {
+    if (!token) {
       return ResponseHelper.success(
         res,
         { user: null },
@@ -35,7 +42,7 @@ export const verifyToken = asyncHandler(async (
     }
 
     // Verify JWT
-    const decoded = jwt.verify(cookieToken, ACCESS_SECRET, {
+    const decoded = jwt.verify(token, ACCESS_SECRET, {
       algorithms: ["HS256"],
       issuer: JWT_ISSUER,
       audience: JWT_AUDIENCE,
@@ -46,7 +53,7 @@ export const verifyToken = asyncHandler(async (
       .select("_id username role schoolId email")
       .lean();
     if (!user) {
-      // User not found - clear invalid cookie and return null
+      // User not found - return null
       return ResponseHelper.success(
         res,
         { user: null },

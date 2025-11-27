@@ -4,14 +4,22 @@ import { User } from "../models/user.model.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 export const auth = asyncHandler(async (req, res, next) => {
     try {
-        // Strict cookie-based auth: read JWT only from httpOnly cookie
-        const token = req?.cookies?.accessToken;
+        // Try to get token from Authorization header first, then fall back to cookie
+        let token;
+        const authHeader = req.headers.authorization;
+        if (authHeader && authHeader.startsWith("Bearer ")) {
+            token = authHeader.substring(7); // Remove "Bearer " prefix
+        }
+        else {
+            // Fall back to cookie
+            token = req?.cookies?.accessToken;
+        }
         // Debug logging
-        console.log("Auth Middleware - Cookies received:", Object.keys(req?.cookies || {}));
+        console.log("Auth Middleware - Token source:", authHeader ? "Authorization header" : "Cookie");
         console.log("Auth Middleware - Token present:", !!token);
         console.log("Auth Middleware - Origin:", req.headers.origin);
         if (!token) {
-            throw new AppError("ACCESS_DENIED", { reason: "No token found in cookies" });
+            throw new AppError("ACCESS_DENIED", { reason: "No token found" });
         }
         const ACCESS_SECRET = process.env.JWT_ACCESS_SECRET;
         const JWT_ISSUER = process.env.JWT_ISSUER;

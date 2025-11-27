@@ -129,22 +129,19 @@ export const login = asyncHandler(async (req, res, next) => {
             NODE_ENV: process.env.NODE_ENV,
             CLIENT_URL: process.env.CLIENT_URL
         });
+        // Set cookie (for same-origin or when cookies work)
         res.cookie("accessToken", accessToken, {
             httpOnly: true,
             secure: isProduction,
             sameSite: isProduction ? "none" : "lax",
             path: "/",
             maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-            // partitioned: isProduction, // For Chrome's CHIPS (Cookies Having Independent Partitioned State)
         });
-        // Also set the cookie header manually to ensure all attributes are included
-        if (isProduction) {
-            const cookieValue = `accessToken=${accessToken}; HttpOnly; Secure; SameSite=None; Path=/; Max-Age=${7 * 24 * 60 * 60}`;
-            res.setHeader("Set-Cookie", cookieValue);
-        }
         logger.info("User logged in", { userId, schoolId });
+        // Return token in response body for cross-origin auth via Authorization header
         return ResponseHelper.success(res, {
             user: resUser,
+            accessToken, // Send token to client for localStorage storage
         }, SUCCESS_CODES.USER_LOGGED_IN);
     }
     catch (err) {
