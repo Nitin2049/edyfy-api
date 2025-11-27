@@ -135,7 +135,13 @@ export const login = asyncHandler(async (req, res, next) => {
             sameSite: isProduction ? "none" : "lax",
             path: "/",
             maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+            // partitioned: isProduction, // For Chrome's CHIPS (Cookies Having Independent Partitioned State)
         });
+        // Also set the cookie header manually to ensure all attributes are included
+        if (isProduction) {
+            const cookieValue = `accessToken=${accessToken}; HttpOnly; Secure; SameSite=None; Path=/; Max-Age=${7 * 24 * 60 * 60}`;
+            res.setHeader("Set-Cookie", cookieValue);
+        }
         logger.info("User logged in", { userId, schoolId });
         return ResponseHelper.success(res, {
             user: resUser,

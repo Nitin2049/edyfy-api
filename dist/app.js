@@ -7,6 +7,8 @@ import { httpLogger } from "./middlewares/logger.middleware.js";
 import { deepSanitize } from "./utils/sanitize.helper.js";
 import cookieParser from "cookie-parser";
 const app = express();
+// Trust proxy - required for secure cookies behind Render's proxy
+app.set("trust proxy", 1);
 app.use(cookieParser());
 // CORS configuration
 // CLIENT_URL may be a single origin or comma-separated list

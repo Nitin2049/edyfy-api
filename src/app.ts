@@ -10,6 +10,9 @@ import cookieParser from "cookie-parser";
 
 const app = express();
 
+// Trust proxy - required for secure cookies behind Render's proxy
+app.set("trust proxy", 1);
+
 app.use(cookieParser());
 
 // CORS configuration
