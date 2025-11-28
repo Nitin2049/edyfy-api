@@ -4592,3 +4592,45 @@
 2025-11-27 19:49:47 | [32minfo[39m: 🚀 Server running on port 8000 
 2025-11-27 19:52:27 | [32minfo[39m: 🚀 Server running on port 8000 
 2025-11-27 19:53:30 | [32minfo[39m: 🚀 Server running on port 8000 
+2025-11-28 21:27:40 | [32minfo[39m: 🚀 Server running on port 8000 
+2025-11-28 21:28:52 | [32minfo[39m: Setting cookie {"isProduction":true,"NODE_ENV":"production","CLIENT_URL":"http://192.168.1.4:3000"}
+2025-11-28 21:28:52 | [32minfo[39m: User logged in {"userId":"690ce279a4bf15e4a27a273e","schoolId":"690ce4b4a4bf15e4a27a2746"}
+2025-11-28 21:28:52 | [32minfo[39m: POST /api/v1/auth/login 200 797 - 383.800 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:28:56 | [32minfo[39m: GET /api/v1/me 200 1020 - 148.202 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:28:56 | [32minfo[39m: GET /api/v1/me 200 1020 - 138.130 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:28:56 | [32minfo[39m: GET /api/v1/schools/690ce4b4a4bf15e4a27a2746 200 706 - 102.543 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:28:56 | [32minfo[39m: GET /api/v1/schools/690ce4b4a4bf15e4a27a2746 200 706 - 113.816 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:29:05 | [32minfo[39m: GET /api/v1/sessions/current 200 317 - 182.078 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:29:05 | [32minfo[39m: GET /api/v1/classes?limit=200&sort=level%20section 200 545 - 249.630 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:29:05 | [32minfo[39m: GET /api/v1/sessions/current 200 317 - 226.325 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:29:05 | [32minfo[39m: GET /api/v1/classes?limit=200&sort=level%20section 200 545 - 236.661 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:29:05 | [32minfo[39m: GET /api/v1/teachers?limit=200&sort=username 200 1316 - 558.544 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:29:05 | [32minfo[39m: GET /api/v1/teachers?limit=200&sort=username 200 1316 - 513.547 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:29:41 | [32minfo[39m: GET /api/v1/teachers 200 1315 - 145.173 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:29:42 | [32minfo[39m: GET /api/v1/teachers 200 1315 - 169.609 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:30:33 | [32minfo[39m: GET /api/v1/teachers/dipendra23 200 679 - 221.734 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:30:34 | [32minfo[39m: GET /api/v1/teachers/dipendra23 200 679 - 179.758 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:31:30 | [32minfo[39m: GET /api/v1/teachers 200 1315 - 141.130 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:31:30 | [32minfo[39m: GET /api/v1/teachers 200 1315 - 116.358 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:43:33 | [32minfo[39m: GET /api/v1/teachers/dipendra23 200 679 - 244.409 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:43:33 | [32minfo[39m: GET /api/v1/teachers/dipendra23 200 679 - 106.355 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:43:36 | [32minfo[39m: GET /api/v1/teachers 200 1315 - 181.941 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:43:36 | [32minfo[39m: GET /api/v1/teachers 200 1315 - 155.191 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:43:37 | [32minfo[39m: GET /api/v1/sessions/current 200 317 - 331.566 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:43:37 | [32minfo[39m: GET /api/v1/classes?limit=200&sort=level%20section 200 545 - 307.173 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:43:37 | [32minfo[39m: GET /api/v1/classes?limit=200&sort=level%20section 200 545 - 218.762 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:43:37 | [32minfo[39m: GET /api/v1/sessions/current 200 317 - 215.176 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:43:37 | [32minfo[39m: GET /api/v1/teachers?limit=200&sort=username 200 1316 - 261.082 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:43:38 | [32minfo[39m: GET /api/v1/teachers?limit=200&sort=username 200 1316 - 542.131 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:43:50 | [32minfo[39m: POST /api/v1/classes 400 233 - 101.156 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:45:45 | [32minfo[39m: GET /api/v1/teachers 200 1315 - 88.476 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:45:45 | [32minfo[39m: GET /api/v1/teachers 200 1315 - 84.770 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:45:54 | [32minfo[39m: GET /api/v1/sessions/current 200 317 - 100.303 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:45:54 | [32minfo[39m: GET /api/v1/sessions/current 200 317 - 79.354 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:45:54 | [32minfo[39m: GET /api/v1/classes?limit=200&sort=level%20section 200 545 - 99.617 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:45:54 | [32minfo[39m: GET /api/v1/classes?limit=200&sort=level%20section 200 545 - 94.587 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:45:54 | [32minfo[39m: GET /api/v1/teachers?limit=200&sort=username 200 1316 - 138.476 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:45:54 | [32minfo[39m: GET /api/v1/teachers?limit=200&sort=username 200 1316 - 125.208 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:46:52 | [32minfo[39m: POST /api/v1/classes 400 233 - 58.857 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:52:07 | [32minfo[39m: POST /api/v1/classes 201 287 - 377.312 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
+2025-11-28 21:52:07 | [32minfo[39m: GET /api/v1/classes?limit=200&sort=level%20section 200 737 - 68.684 ms | userId=guest | schoolId=none | ip=::ffff:192.168.1.4 
